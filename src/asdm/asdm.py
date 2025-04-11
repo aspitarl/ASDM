@@ -1376,6 +1376,12 @@ class sdmodel(object):
                 
                 # read variables
                 variables_root = BeautifulSoup(xmile_content, 'xml').find('variables') # omit names in view
+
+                # strip variable names
+                for element in variables_root.findAll(True):
+                    if element.string:
+                        element.string = element.string.strip()
+
                 stocks = variables_root.findAll('stock')
                 flows = variables_root.findAll('flow')
                 auxiliaries = variables_root.findAll('aux')
